@@ -39,7 +39,7 @@ public class ListUserAction extends Action {
 		// Business logic ผ๖วเ
 		UserService userService=new UserServiceImpl();
 		Map<String , Object> map= userService.getUserList(search);
-		System.out.println("map :: " + map);
+		System.out.println("map :: " + map);//test
 
 		Page resultPage	= 
 					new Page( currentPage, ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);

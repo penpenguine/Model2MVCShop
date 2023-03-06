@@ -27,6 +27,8 @@ public class ListProductAction extends Action {
 		search.setCurrentPage(currentPage);
 		search.setSearchCondition(request.getParameter("searchCondition"));
 		search.setSearchKeyword(request.getParameter("searchKeyword"));
+		System.out.println("searchCondition = " + request.getParameter("searchCondition"));//test
+		System.out.println("searchKeyword = " + request.getParameter("searchKeyword"));//test
 	
 		
 		// web.xml  meta-data 로 부터 상수 추출 
@@ -37,7 +39,7 @@ public class ListProductAction extends Action {
 		// Business logic 수행
 		ProductService productService = new ProductServiceImpl();
 		Map<String , Object> map = (Map<String, Object>)productService.getProductList(search);
-		System.out.println("map :: " + map);
+		System.out.println("map :: " + map);//test
 		
 		String menu = request.getParameter("menu");
 		Page resultPage	= new Page( currentPage, ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);

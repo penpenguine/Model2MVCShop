@@ -86,16 +86,17 @@ public class PurchaseDAO {
 		return purchase;
 	}//e findPurchase
 	
-public Map<String , Object> getPurchaseList(Search search) throws Exception {
+public Map<String , Object> getPurchaseList(Search search, String userId) throws Exception {
 		
 		Map<String , Object>  map = new HashMap<String, Object>();
 		
 		Connection con = DBUtil.getConnection();
 		
 		// Original Query 구성
-		String sql = "SELECT tran_no, buyer_id, tran_status_code  FROM  transaction " +
-						"WHERE buyer_id = ?" +
-						"ORDER BY tran_no";
+		String sql = "SELECT tran_no, buyer_id, tran_status_code, prod_no  FROM  transaction " +
+						"WHERE buyer_id = '" + userId + 
+						"' ORDER BY tran_no";
+		
 		
 		System.out.println("PurchaseDAO::Original SQL :: " + sql);// test
 		
@@ -105,11 +106,11 @@ public Map<String , Object> getPurchaseList(Search search) throws Exception {
 		
 		//==> CurrentPage 게시물만 받도록 Query 다시구성
 		sql = makeCurrentPageSql(sql, search);
-		PreparedStatement pStmt = con.prepareStatement(sql);
+		PreparedStatement pStmt = 
+				con.prepareStatement(	sql,ResultSet.TYPE_SCROLL_INSENSITIVE,
+											ResultSet.CONCUR_UPDATABLE);
 		ResultSet rs = pStmt.executeQuery();
-	
-		System.out.println("search : " +search);//test
-
+		
 		List<Purchase> list = new ArrayList<Purchase>();
 		
 		ProductService productservice = new ProductServiceImpl();
