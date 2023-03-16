@@ -166,7 +166,20 @@
 		<td align="left"><%= vo.getRegDate() %>
 		</td>
 		<td></td>
-		<td align="left">판매중
+		<td align="left">
+		<%if (vo.getTranCode() == null){ %>
+				판매중
+		<%}else{ %>
+			<%if (vo.getTranCode().trim().equals("1")){%>
+					 <a href="/updateTranCodeByProd.do?tranNo=<%=vo.getTranNo()%>&tranCode=2"> 배송하기 </a>
+			<%}else if(vo.getTranCode().trim().equals("2")){ %>
+				배송중
+			<%}else if(vo.getTranCode().trim().equals("3")){ %>
+				배송완료
+			<%}else{ %>
+				오류
+			<%} %>
+		<%} %>
 		</td>		
 	</tr>
 	<tr>

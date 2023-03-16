@@ -10,6 +10,8 @@ import com.model2.mvc.common.Search;
 import com.model2.mvc.framework.Action;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.product.impl.ProductServiceImpl;
+import com.model2.mvc.service.purchase.PurchaseService;
+import com.model2.mvc.service.purchase.impl.PurchaseServiceImpl;
 
 public class ListProductAction extends Action {
 
@@ -37,8 +39,8 @@ public class ListProductAction extends Action {
 		search.setPageSize(pageSize);
 
 		// Business logic ผ๖วเ
-		ProductService productService = new ProductServiceImpl();
-		Map<String , Object> map = (Map<String, Object>)productService.getProductList(search);
+		PurchaseService purchaseService = new PurchaseServiceImpl();
+		Map<String , Object> map = (Map<String, Object>)purchaseService.getSaleList(search);
 		System.out.println("map :: " + map);//test
 		
 		String menu = request.getParameter("menu");
