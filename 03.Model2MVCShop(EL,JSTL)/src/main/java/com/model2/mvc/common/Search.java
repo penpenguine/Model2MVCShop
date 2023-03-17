@@ -9,6 +9,7 @@ public class Search {
 	private String searchKeyword;
 	private int pageSize;
 	
+	
 	///Constructor
 	public Search() {
 	}
